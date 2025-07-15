@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Paid Courses For Free</title>
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --card: #1a1a1a;
+      --accent: #00ff90;
+      --text: #e6e6e6;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Consolas, monospace;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #111;
+      padding: 1rem 2rem;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--accent);
+      box-shadow: 0 2px 4px #000;
+      position: relative;
+    }
+
+    .hamburger {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      color: var(--accent);
+      display: none;
+      cursor: pointer;
+    }
+
+    .layout {
+      display: flex;
+      flex: 1;
+    }
+
+    /* Sidebar */
+    #sidebar {
+      background: #111;
+      padding: 2rem 1rem;
+      min-width: 220px;
+      border-right: 2px solid var(--card);
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1000;
+    }
+
+    #sidebar ul {
+      list-style: none;
+    }
+
+    #sidebar li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--accent);
+      cursor: pointer;
+    }
+
+    #sidebar li:hover {
+      color: #fff;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.4rem;
+      background: none;
+      border: none;
+      color: var(--accent);
+      cursor: pointer;
+      display: none;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    #course-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+
+    .course-card {
+      background: var(--card);
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 1.2rem 1rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--accent);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .course-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px #000;
+    }
+
+    .course-title {
+      color: var(--accent);
+    }
+
+    footer {
+      padding: 0.6rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+      .layout {
+        flex-direction: column;
+      }
+      #sidebar {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        transform: translateX(-100%);
+        border-right: none;
+        border-bottom: 2px solid var(--card);
+      }
+      #sidebar.active {
+        transform: translateX(0%);
+      }
+      .close-btn {
+        display: block;
+      }
+      #sidebar li {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding: 1.5rem 1rem;
+      }
+      .course-card {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="hamburger" onclick="toggleSidebar()">☰</button>
+    Paid Courses For Free
+  </header>
+
+  <div class="layout" id="layout">
+    <!-- Sidebar -->
+    <aside id="sidebar">
+      <button class="close-btn" onclick="closeSidebar()">✖</button>
+      <ul>
+      <a href="https://whatsapp.com/channel/0029Vb2ru4yBFLgQpNQ2rA1m" style="text-decoration: none; color: inherit;"><li><span class="icon">📱</span> Whatsapp Channel</li></a>
+      <a href="https://www.youtube.com/@ophackerstdio/UCpDlI_XNkAEBR1q7wWAlQTw?sub_confirmation=1" style="text-decoration: none; color: inherit;"><li><span class="icon">📺</span> Youtube Channel</li></a>
+      <a href="https://www.facebook.com/profile.php?id=61577075805787" style="text-decoration: none; color: inherit;"><li><span class="icon">📘</span> Facebook Page</li></a>
+      <a href="https://t.me/ophackerstdio" style="text-decoration: none; color: inherit;"><li><span class="icon">📘</span> Telegram Account</li></a>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+    <section id="course-list">
+
+      <a href="https://drive.google.com/drive/folders/15DZTb3kraSVCRRQnk3duOz1sPPcrK0Ti?fbclid=IwAR2driJCbqocy8fIgJhO7OVBhudjZ8BmtaWHSU0Vqxl15nzb-3-wfwlOeWs" class="course-card"><span class="course-title">App Development Course</span></a>
+
+      <a href="https://drive.google.com/drive/folders/1OOsQllXiDweCg5vMo9J9TI6HXgHEExKm" class="course-card"><span class="course-title">Ethical Hacking Course 01</span></a>
+
+      <a href="https://mega.nz/folder/WvIlFCLQ#KHWbWS4Ez57R3jCdpYdREw" class="course-card"><span class="course-title">Ethical Hacking Course 02</span></a>
+
+      <a href="https://drive.google.com/drive/folders/1S4S3zpayFPihzhBrOJnAjPUjJUz6R4gB" class="course-card"><span class="course-title">Canva Full Course</span></a>
+
+      <a href="https://drive.google.com/drive/folders/1V2HhH7qWtK7f9xX7FMvj5sXd0Kn66UPC" class="course-card"><span class="course-title">WebApp pentesting course</span></a>
+
+      <a href="https://drive.google.com/drive/folders/1qqxvqaujM-GuSnr4ZEbgJAVIOMQ-750a?usp=sharing" class="course-card"><span class="course-title">Command Prompt(CMD) Full Course</span></a>
+
+      <a href="https://drive.google.com/drive/folders/1AgyoBNUJSDwlKpPbwmQyu5SjUWeaM7hB" class="course-card"><span class="course-title">Kashif Majid Paid 7 Courses</span></a>
+
+      <a href="https://drive.google.com/drive/folders/1io_TTmjIVx_75PQJ8iz_7bLH92L9Keg?usp=sharing" class="course-card"><span class="course-title">Kashif Majid Paid 8 Courses</span></a>
+
+      <a href="https://drive.google.com/drive/folders/1zD-JrP4sgIlAedjaLxAMdg_4ArF9IYyN" class="course-card"><span class="course-title">Android Hacking Complete Course</span></a>
+
+      <a href="https://drive.google.com/drive/folders/160ZVuNqHVuRE2REGUBn03I2aM4m7EAiN" class="course-card"><span class="course-title">Graphic Designing Full Course</span></a>
+
+      <a href="https://mega.nz/folder/bo123ATb#6L16Tbc3z47O4KhsIXKkTQ" class="course-card"><span class="course-title">Google Ads Course</span></a>
+
+      <a href="https://drive.google.com/drive/u/0/mobile/folders/1DMAyUAmBylkE4ZemMbcHJYzNoD0WPgJD" class="course-card"><span class="course-title">Facebook Ads Course</span></a>
+
+      <a href="https://drive.google.com/drive/folders/10xPfo1XAEkgzHVciMPbc4b4ymsHULYtN" class="course-card"><span class="course-title">3d ANIMATION Complete Course</span></a>
+
+      <a href="https://drive.google.com/drive/folders/15BflA5X4rL9GkbOslKeqSUNrsDcT5Sjt" class="course-card"><span class="course-title">Nmap Full Course</span></a>
+
+      <a href="https://drive.google.com/drive/folders/1f5OGLWLGeW5LA9fWZCnWT503muSrknFU" class="course-card"><span class="course-title">Mobile Repairing Full Course</span></a>
+
+      <a href="https://www.mediafire.com/file/6kwa0ifpbba1tlr/NEW_RAT_0.0.7z/file" class="course-card"><span class="course-title">Mobile Rat Setup</span></a>
+
+      <a href="https://drive.google.com/drive/folders/1OrP5f0KmA1MLVk8CrpN2Y0OmNy0K9HQy" class="course-card"><span class="course-title">Free Remote Desktop Protocol(RDP) <br> Method</span></a>
+
+      <a href="https://www.mediafire.com/file/y78pzecdr5bmj7y/Pubg_Hack_Making_Course.rar/file" class="course-card"><span class="course-title">Pubg Hack Making Course</span></a>
+
+      <a href="https://drive.google.com/drive/folders/1v4da8YS3xAo-kaDKQSqm2b__38H5HIzu" class="course-card"><span class="course-title">Darkweb Access Method</span></a>
+
+      <a href="https://mega.nz/folder/spoGDToC#zjYFlRAU7S06u5jSaQnvYw" class="course-card"><span class="course-title">MOBILE H@CKING COURSE</span></a>
+
+      <a href="#" class="course-card"><span class="course-title">EMPTY</span></a>
+
+      <a href="#" class="course-card"><span class="course-title">EMPTY</span></a>
+
+      <a href="#" class="course-card"><span class="course-title">EMPTY</span></a>
+
+      <a href="#" class="course-card"><span class="course-title">EMPTY</span></a>
+
+      <a href="#" class="course-card"><span class="course-title">EMPTY</span></a>
+
+      <a href="#" class="course-card"><span class="course-title">EMPTY</span></a>
+
+    </section>
+    </main>
+  </div>
+
+  <footer>&copy; 2025 Paid Courses For Free</footer>
+
+  <script>
+    const sidebar = document.getElementById("sidebar");
+
+    function toggleSidebar() {
+      sidebar.classList.toggle("active");
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove("active");
+    }
+
+    document.addEventListener("click", function (event) {
+      const isClickInside = sidebar.contains(event.target) || event.target.classList.contains("hamburger");
+      if (!isClickInside) {
+        closeSidebar();
+      }
+    });
+  </script>
+</body>
+</html>

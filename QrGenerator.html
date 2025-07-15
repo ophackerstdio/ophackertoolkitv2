@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>QR Generator By OP Hacker</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+:root {
+    --bg: #0f0f0f;
+    --card-bg: #1a1a1a;
+    --accent: #00ff9c;
+    --accent-dim: rgba(0, 255, 156, 0.2);
+    --text: #e5e7eb;
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    min-height: 100vh;
+}
+.menu-btn {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--accent);
+    cursor: pointer;
+    z-index: 1100;
+    transition: transform 0.2s;
+    display: none;
+}
+.menu-btn:focus {
+    outline: none;
+}
+.menu-btn:active {
+    transform: scale(0.9);
+}
+.sidebar {
+    width: 260px;
+    background: #111;
+    padding: 5rem 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-shadow: 0 0 25px var(--accent-dim);
+}
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--accent);
+    font-size: 1rem;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.sidebar a:hover {
+    color: var(--text);
+}
+.sidebar i {
+    font-size: 1.25rem;
+}
+main {
+    flex: 1;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+header {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    color: var(--accent);
+    text-shadow: 0 0 8px var(--accent);
+    text-align: center;
+}
+.card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 25px var(--accent-dim);
+    width: 100%;
+    max-width: 460px;
+}
+.chooser {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.chooser label {
+    cursor: pointer;
+}
+.chooser input {
+    accent-color: var(--accent);
+}
+input[type="text"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--accent);
+    background: #0f0f0f;
+    color: var(--text);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+.error {
+    color: #ff4d4d;
+    font-size: 0.875rem;
+    height: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+button:hover {
+    background: var(--accent);
+    color: var(--bg);
+}
+#qr {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+.download {
+    margin-top: 1rem;
+    display: none;
+    text-align: center;
+}
+.download a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+.toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+}
+.toggle input {
+    accent-color: var(--accent);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -260px;
+        height: 100%;
+        z-index: 1050;
+        transition: left 0.3s ease;
+        touch-action: none;
+    }
+    .sidebar.open {
+        left: 0;
+    }
+    .menu-btn {
+        display: block;
+    }
+    body {
+        flex-direction: column;
+    }
+    main {
+        padding-top: 4rem;
+    }
+}
+</style>
+</head>
+<body>
+
+<button id="menuBtn" class="menu-btn" aria-label="Open menu">&#9776;</button>
+
+<nav id="sidebar" class="sidebar" aria-label="Social links">
+    <a href="https://whatsapp.com/channel/0029Vb2ru4yBFLgQpNQ2rA1m" target="_blank"><i class="fa-brands fa-whatsapp"></i> Whatsapp Channel</a>
+    <a href="https://www.youtube.com/@ophackerstdio/UCpDlI_XNkAEBR1q7wWAlQTw?sub_confirmation=1" target="_blank"><i class="fa-brands fa-youtube"></i> Youtube Channel</a>
+    <a href="https://www.facebook.com/profile.php?id=61577075805787" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook Page</a>
+</nav>
+
+<main>
+    <header>QR Generator By OP Hacker</header>
+    <div class="card">
+        <div class="chooser">
+            <label><input type="radio" name="mode" value="link" checked> Link</label>
+            <label><input type="radio" name="mode" value="text"> Text</label>
+        </div>
+        <input id="inputField" type="text" placeholder="https://ophackertoolkitv2.vercel.app" />
+        <div id="error" class="error"></div>
+        <button id="generate">Generate QR</button>
+        <div class="toggle">
+            <input type="checkbox" id="liveToggle">
+            <label for="liveToggle">Live generate while typing</label>
+        </div>
+        <div id="qr"></div>
+        <div id="download" class="download">
+            <a id="downloadLink" href="#" download="qr-code.png">Download PNG</a>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const menuBtn = document.getElementById('menuBtn');
+const sidebar = document.getElementById('sidebar');
+function openSidebar(e) {
+    e.stopPropagation();
+    sidebar.classList.add('open');
+    menuBtn.style.display = 'none';
+}
+function closeSidebar() {
+    sidebar.classList.remove('open');
+    menuBtn.style.display = 'block';
+}
+menuBtn.addEventListener('click', openSidebar);
+menuBtn.addEventListener('touchstart', openSidebar);
+window.addEventListener('click', e => {
+    if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && e.target !== menuBtn) {
+        closeSidebar();
+    }
+});
+window.addEventListener('touchstart', e => {
+    if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && e.target !== menuBtn) {
+        closeSidebar();
+    }
+});
+window.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+        closeSidebar();
+    }
+});
+
+const modeRadios = document.querySelectorAll('input[name="mode"]');
+const inputField = document.getElementById('inputField');
+const errorMsg = document.getElementById('error');
+const btn = document.getElementById('generate');
+const qrContainer = document.getElementById('qr');
+const downloadSection = document.getElementById('download');
+const downloadLink = document.getElementById('downloadLink');
+const liveToggle = document.getElementById('liveToggle');
+
+let qr;
+let debounceTimer;
+
+function setError(msg = '') {
+    errorMsg.textContent = msg;
+}
+
+function switchMode() {
+    const mode = document.querySelector('input[name="mode"]:checked').value;
+    inputField.placeholder = mode === 'link' ? 'https://ophackertoolkitv2.vercel.app' : 'Enter Text';
+    setError();
+    inputField.value = '';
+    qrContainer.innerHTML = '';
+    downloadSection.style.display = 'none';
+}
+
+modeRadios.forEach(r => r.addEventListener('change', switchMode));
+
+function isValidURL(str) {
+    try {
+        const u = new URL(str);
+        return u.protocol === 'http:' || u.protocol === 'https:';
+    } catch {
+        return false;
+    }
+}
+
+function generateCode(data) {
+    qrContainer.innerHTML = '';
+    downloadSection.style.display = 'none';
+    qr = new QRCode(qrContainer, {
+        text: data,
+        width: 256,
+        height: 256,
+        correctLevel: QRCode.CorrectLevel.H
+    });
+    setTimeout(() => {
+        const img = qrContainer.querySelector('img');
+        if (img) {
+            downloadLink.href = img.src;
+            downloadSection.style.display = 'block';
+        }
+    }, 200);
+}
+
+btn.addEventListener('click', () => {
+    const mode = document.querySelector('input[name="mode"]:checked').value;
+    const val = inputField.value.trim();
+    if (mode === 'link') {
+        if (!val) return setError('Link required');
+        if (!isValidURL(val)) return setError('Invalid link');
+    } else {
+        if (!val) return setError('Text required');
+    }
+    setError();
+    generateCode(val);
+});
+
+inputField.addEventListener('input', () => setError());
+
+// Live QR generation
+function liveGenerateHandler() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+        const mode = document.querySelector('input[name="mode"]:checked').value;
+        const val = inputField.value.trim();
+        if (!val) {
+            setError('');
+            qrContainer.innerHTML = '';
+            downloadSection.style.display = 'none';
+            return;
+        }
+        if (mode === 'link' && !isValidURL(val)) {
+            setError('Invalid link');
+            return;
+        }
+        setError('');
+        generateCode(val);
+    }, 300);
+}
+
+liveToggle.addEventListener('change', () => {
+    if (liveToggle.checked) {
+        inputField.addEventListener('input', liveGenerateHandler);
+    } else {
+        inputField.removeEventListener('input', liveGenerateHandler);
+    }
+});
+</script>
+</body>
+</html>

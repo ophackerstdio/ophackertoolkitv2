@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OP Hacker ToolKit V2</title>
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --card: #1a1a1a;
+      --accent: #00ff90;
+      --text: #e6e6e6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Consolas, monospace;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    #sidebar {
+      width: 220px;
+      height: 100vh;
+      background: var(--card);
+      color: var(--accent);
+      box-shadow: 2px 0 10px #000;
+      padding-top: 60px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 1000;
+      transition: left 0.3s ease;
+    }
+
+    #sidebar ul {
+      list-style: none;
+      padding: 0 20px;
+    }
+
+    #sidebar li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    #sidebar .icon {
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    #sidebar-close {
+      display: none;
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--accent);
+    }
+
+    /* Show close button only on mobile */
+    @media (max-width: 768px) {
+      #sidebar {
+        left: -250px;
+      }
+
+      #sidebar.open {
+        left: 0;
+      }
+
+      #sidebar-close {
+        display: block;
+      }
+
+      #menu-btn {
+        display: block;
+      }
+
+      main {
+        padding-left: 0;
+      }
+    }
+
+    /* HEADER */
+    header {
+      background: #111;
+      padding: 1rem 2rem;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--accent);
+      box-shadow: 0 2px 4px #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      width: 100%;
+      height: 60px;
+      top: 0;
+      left: 0;
+      z-index: 999;
+    }
+
+    #menu-btn {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      cursor: pointer;
+      display: none;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      padding: 2rem;
+      padding-left: 240px;
+      margin-top: 60px;
+      width: 100%;
+    }
+
+    /* TOOL CARDS */
+    #home {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tool-card {
+      background: var(--card);
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+      padding: 2.5rem 1rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: bold;
+      color: var(--accent);
+      font-size: 1.25rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 16px #000;
+    }
+
+    .tool-card img {
+      max-width: 100%;
+      max-height: 160px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    /* SECTIONS */
+    .tool-section {
+      display: none;
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #000;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .tool-section.active {
+      display: block;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      color: var(--accent);
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    input[type="text"],
+    input[type="datetime-local"],
+    textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 6px;
+      border: none;
+      background: #262626;
+      color: var(--text);
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 6px;
+      background: var(--accent);
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .back-home {
+      background: #333;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    output {
+      display: block;
+      margin-top: 1rem;
+      padding: 0.6rem;
+      border-radius: 6px;
+      background: #262626;
+      word-wrap: break-word;
+    }
+
+    footer {
+      padding: 0.6rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #555;
+      margin-left: 220px;
+    }
+
+    /* Responsive cards */
+    @media (max-width: 600px) {
+      #home {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .tool-card {
+        padding: 2rem 1rem;
+        font-size: 1rem;
+      }
+
+      .tool-card img {
+        width: 64px;
+        height: 64px;
+      }
+
+      footer {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <div id="sidebar-close">&times;</div>
+    <ul>
+      <a href="https://whatsapp.com/channel/0029Vb2ru4yBFLgQpNQ2rA1m" style="text-decoration: none; color: inherit;"><li><span class="icon">📱</span> Whatsapp Channel</li></a>
+      <a href="https://www.youtube.com/@ophackerstdio/UCpDlI_XNkAEBR1q7wWAlQTw?sub_confirmation=1" style="text-decoration: none; color: inherit;"><li><span class="icon">📺</span> Youtube Channel</li></a>
+      <a href="https://www.facebook.com/profile.php?id=61577075805787" style="text-decoration: none; color: inherit;"><li><span class="icon">📘</span> Facebook Page</li></a>
+      <a href="https://t.me/ophackerstdio" style="text-decoration: none; color: inherit;"><li><span class="icon">📘</span> Telegram Account</li></a>
+    </ul>
+  </div>
+
+  <div style="flex: 1; display: flex; flex-direction: column;">
+    <header>
+      <div id="menu-btn">☰</div>
+      OP Hacker ToolKit V2
+    </header>
+
+    <main>
+      <section id="home">
+  <!-- Symblish card opens external page -->
+  <a href="symblish.html" class="tool-card" id="symblish-card">
+    <img src="media/symblish.png" alt="Symblish Icon">
+    <span>Symblish Language</span>
+  </a>
+  <!-- QR Generator card -->
+  <a href="QrGenerator.html" class="tool-card" id="qr-card">
+    <img src="media/whatsappchannelqr.png" alt="QR Code Generator Icon">
+    <span>QR Code Generator</span>
+  </a>
+  <!-- Password Generator card with new icon -->
+  <div class="tool-card" data-target="password" id="password-card">
+    <img src="media/PasswordGenerator.png" alt="Password Generator Icon">
+    <span>Password Generator</span>
+  </div>
+  <!-- Paid Courses For Free card (external link) -->
+  <a href="paidcoursesforfree.html" class="tool-card" id="paidcourses-card">
+    <img src="media/paidcoursesforfree.png" alt="Paid Courses For Free Icon">
+    <span>Paid Courses For Free</span>
+  </a>
+  <a href="premiumappsforfree.html" class="tool-card" id="paidcourses-card">
+    <img src="media/premiumapps.png" alt="Paid Courses For Free Icon">
+    <span>Premium Apps For Free</span>
+  </a>
+  <!-- Banning Methods card -->
+    <a href="banningmethods.html" class="tool-card" id="banningmethods-card">
+    <img src="media/banningmethods.png" alt="Banning Methods Icon">
+    <span>Banning Unbanning Methods</span>
+    </a>
+
+  <a href="aiorchatbots.html" class="tool-card" id="paidcourses-card">
+    <img src="media/chatbot.png" alt="Paid Courses For Free Icon">
+    <span>Ai or Chatbot</span>
+  </a>
+    <a href="hackingtools.html" class="tool-card" id="banningmethods-card">
+    <img src="media/HackingTools.png" alt="Banning Methods Icon">
+    <span>Hacking Tools</span>
+    </a>
+    <a href="moviewebsites.html" class="tool-card" id="banningmethods-card">
+    <img src="media/movieslogo.png" alt="Banning Methods Icon">
+    <span>All Movies Websites</span>
+    </a>
+    <a href="https://ophackertoolkitv1.vercel.app" class="tool-card" id="banningmethods-card">
+    <img src="media/ophackertoolkitv1.png" alt="Banning Methods Icon">
+    <span>OP Hacker Toolkit V1</span>
+    </a>
+    
+</section>
+
+      <section id="password" class="tool-section">
+        <button class="back-home">← Home</button>
+        <h2>Password Generator</h2>
+        <label for="pwd-length">Length (8‑64)</label>
+        <input type="text" id="pwd-length" value="16" />
+        <label><input type="checkbox" id="opt-upper" checked> Uppercase</label>
+        <label><input type="checkbox" id="opt-lower" checked> Lowercase</label>
+        <label><input type="checkbox" id="opt-num" checked> Numbers</label>
+        <label><input type="checkbox" id="opt-symbol" checked> Symbols</label>
+        <button id="pwd-generate">Generate</button>
+        <output id="pwd-output"></output>
+      </section>
+    </main>
+
+    <footer>&copy; 2025 OP Hacker ToolKit V2</footer>
+  </div>
+
+  <script>
+    const homeSection = document.getElementById('home');
+    const toolSections = document.querySelectorAll('.tool-section');
+
+    function showHome() {
+      homeSection.style.display = 'grid';
+      toolSections.forEach(sec => sec.classList.remove('active'));
+    }
+
+    document.querySelectorAll('.tool-card[data-target]').forEach(card => {
+      card.addEventListener('click', () => {
+        const target = card.getAttribute('data-target');
+        homeSection.style.display = 'none';
+        toolSections.forEach(sec => sec.classList.toggle('active', sec.id === target));
+      });
+    });
+
+    document.querySelectorAll('.back-home').forEach(btn => btn.addEventListener('click', showHome));
+
+    // Password Generator
+    const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const lower = 'abcdefghijklmnopqrstuvwxyz';
+    const nums = '0123456789';
+    const syms = '!@#$%^&*()-_=+[]{};:,.<>/?';
+
+    document.getElementById('pwd-generate').onclick = () => {
+      const len = parseInt(document.getElementById('pwd-length').value, 10);
+      if (isNaN(len) || len < 8 || len > 64) {
+        alert('Length must be 8‑64');
+        return;
+      }
+
+      let charset = '';
+      if (document.getElementById('opt-upper').checked) charset += upper;
+      if (document.getElementById('opt-lower').checked) charset += lower;
+      if (document.getElementById('opt-num').checked) charset += nums;
+      if (document.getElementById('opt-symbol').checked) charset += syms;
+
+      if (charset === '') {
+        alert('Select at least one character set');
+        return;
+      }
+
+      let pwd = '';
+      const array = new Uint32Array(len);
+      window.crypto.getRandomValues(array);
+      for (let i = 0; i < len; i++) {
+        pwd += charset[array[i] % charset.length];
+      }
+      document.getElementById('pwd-output').textContent = pwd;
+    };
+
+    // Sidebar toggle for mobile
+    const menuBtn = document.getElementById('menu-btn');
+    const sidebar = document.getElementById('sidebar');
+    const closeBtn = document.getElementById('sidebar-close');
+
+    menuBtn.onclick = () => {
+      sidebar.classList.toggle('open');
+    };
+
+    closeBtn.onclick = () => {
+      sidebar.classList.remove('open');
+    };
+
+    document.addEventListener('click', function (event) {
+      if (sidebar.classList.contains('open') &&
+        !sidebar.contains(event.target) &&
+        !menuBtn.contains(event.target)) {
+        sidebar.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>

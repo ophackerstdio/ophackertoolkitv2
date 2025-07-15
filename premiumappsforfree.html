@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Premium Apps For Free</title>
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --card: #1a1a1a;
+      --accent: #00ff90;
+      --text: #e6e6e6;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Consolas, monospace;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #111;
+      padding: 1rem 2rem;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--accent);
+      box-shadow: 0 2px 4px #000;
+      position: relative;
+    }
+
+    .hamburger {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      color: var(--accent);
+      display: none;
+      cursor: pointer;
+    }
+
+    .layout {
+      display: flex;
+      flex: 1;
+    }
+
+    /* Sidebar */
+    #sidebar {
+      background: #111;
+      padding: 2rem 1rem;
+      min-width: 220px;
+      border-right: 2px solid var(--card);
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1000;
+    }
+
+    #sidebar ul {
+      list-style: none;
+    }
+
+    #sidebar li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--accent);
+      cursor: pointer;
+    }
+
+    #sidebar li:hover {
+      color: #fff;
+    }
+
+    /* ❌ Close button */
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.4rem;
+      background: none;
+      border: none;
+      color: var(--accent);
+      cursor: pointer;
+      display: none;
+    }
+
+    /* Main content */
+    main {
+      flex: 1;
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    #course-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+
+    .course-card {
+      background: var(--card);
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 1.2rem 1rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--accent);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .course-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px #000;
+    }
+
+    .course-title {
+      color: var(--accent);
+    }
+
+    footer {
+      padding: 0.6rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #555;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .layout {
+        flex-direction: column;
+      }
+
+      #sidebar {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        transform: translateX(-100%);
+        border-right: none;
+        border-bottom: 2px solid var(--card);
+      }
+
+      #sidebar.active {
+        transform: translateX(0%);
+      }
+
+      .close-btn {
+        display: block;
+      }
+
+      #sidebar li {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="hamburger" onclick="toggleSidebar()">☰</button>
+    Premium Apps For Free
+  </header>
+
+  <div class="layout" id="layout">
+    <!-- Sidebar -->
+    <aside id="sidebar">
+      <button class="close-btn" onclick="closeSidebar()">✖</button>
+      <ul>
+      <a href="https://whatsapp.com/channel/0029Vb2ru4yBFLgQpNQ2rA1m" style="text-decoration: none; color: inherit;"><li><span class="icon">📱</span> Whatsapp Channel</li></a>
+      <a href="https://www.youtube.com/@ophackerstdio/UCpDlI_XNkAEBR1q7wWAlQTw?sub_confirmation=1" style="text-decoration: none; color: inherit;"><li><span class="icon">📺</span> Youtube Channel</li></a>
+      <a href="https://www.facebook.com/profile.php?id=61577075805787" style="text-decoration: none; color: inherit;"><li><span class="icon">📘</span> Facebook Page</li></a>
+      <a href="https://t.me/ophackerstdio" style="text-decoration: none; color: inherit;"><li><span class="icon">📘</span> Telegram Account</li></a>
+      </ul>
+    </aside>
+
+    <!-- Main content -->
+    <main>
+      <section id="course-list">
+        <a href="#" class="course-card"><span class="course-title">CapCut Pro Not Available🙁</span></a>
+        <a href="https://www.mediafire.com/file/8aa7iyzok52ixbs/Video+Compressor_2.0.08.apk/file" class="course-card"><span class="course-title">Video Compressor Pro</span></a>
+        <a href="https://www.mediafire.com/folder/tksk48fty4elz/Jazzcash" class="course-card"><span class="course-title">JazzCash Without Biomatric</span></a>
+        <a href="https://www.mediafire.com/file/zd5ekjgfueo69sq/VideoShow+Lite_10.2.4.1+lite.apk/file" class="course-card"><span class="course-title">VideoShow Lite Pro</span></a>
+        <a href="https://www.mediafire.com/file/heo8ea3zarbvtue/Intro+Maker_5.0.3.apk/file" class="course-card"><span class="course-title">Intro Maker Pro</span></a>
+        <a href="https://www.mediafire.com/file/dy4fe1a43yvgrhf/Photo+Lab_3.13.61.apk/file" class="course-card"><span class="course-title">PhotoLab Pro</span></a>
+        <a href="https://www.mediafire.com/file/g5wzahcnpyn202l/InShot_2.123.1487.apk/file" class="course-card"><span class="course-title">InShot Pro</span></a>
+        <a href="https://www.mediafire.com/file/bgq4dncagp9rayr/Spotify_9.0.16.572.apk/file" class="course-card"><span class="course-title">Spotify Pro</span></a>
+        <a href="https://www.mediafire.com/file/1nhthm5kt7wg0es/Remini_3.7.1020.202514479.apk/file" class="course-card"><span class="course-title">Remini Pro</span></a>
+        <a href="https://drive.google.com/drive/folders/1lNfb7xaB46vKQtUkZxFGowSq2RNLy0fY" class="course-card"><span class="course-title">GB Whatsapp</span></a>
+        <a href="https://www.mediafire.com/file/yluhzkq3ire04nx/GBWhatsApp_V17.apk/file" class="course-card"><span class="course-title">GB Whatsapp V17</span></a>
+        <a href="https://www.mediafire.com/file/l62fnt2ghoeoepf/YouTube+Pro_3.87.apk/file" class="course-card"><span class="course-title">Youtube Premium Mod</span></a>
+        <a href="https://www.mediafire.com/file/uoiimanlu0v2zfh/Youtube_Watch_Time_and_Views_1.0.apk/file" class="course-card"><span class="course-title">Youtube Unlimited WatchTime Apk</span></a>
+        <a href="https://ophackerstdio.blogspot.com/2025/04/kinemaster-mod-apk-v751434120-gp.html" class="course-card"><span class="course-title">KineMaster Pro</span></a>
+        <a href="https://ophackerstdio.blogspot.com/2025/04/honista-102-op-hacker-stdio.html" class="course-card"><span class="course-title">HonInsta V10.3</span></a>
+        <a href="https://filecr.com/android/picsart-ai-photo-video-editor-2004/" class="course-card"><span class="course-title">PicsArt Pro</span></a>
+        <a href="https://filecr.com/android/video-downloader-no-watermark/" class="course-card"><span class="course-title">Video Downloader Apk</span></a>
+        <a href="https://ophackerstdio.blogspot.com/2025/04/easypaisa-fake-screenshot-apk-op-hacker.html" class="course-card"><span class="course-title">EasyPaisa Fake ScreenShot Apk</span></a>
+        <a href="https://www.mediafire.com/file/qj6rksouyqkv16i/termux-apk-version-0-119-1.apk/file" class="course-card"><span class="course-title">Termux Latest Version</span></a>
+        <a href="https://mineckraftapk.com/minecraft-apk-download/#google_vignette" class="course-card"><span class="course-title">MineCraft Game</span></a>
+        <a href="https://ophackerstdio.blogspot.com/2025/04/grand-theft-auto-gta-vice-city-mod-apk.html" class="course-card"><span class="course-title">Grand Theft Auto(GTA): Vice City Apk</span></a>
+        <a href="https://filecr.com/pc-games/grand-theft-auto-gta-5-free-download-0004/?id=528761610000" class="course-card"><span class="course-title">Grand Theft Auto(GTA): V For PC</span></a>
+    </section>
+    </main>
+  </div>
+
+  <footer>&copy; 2025 Premium Apps For Free</footer>
+
+  <script>
+    const sidebar = document.getElementById("sidebar");
+
+    function toggleSidebar() {
+      sidebar.classList.toggle("active");
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove("active");
+    }
+
+    // Close sidebar when clicking outside
+    document.addEventListener("click", function (event) {
+      const isClickInside = sidebar.contains(event.target) || event.target.classList.contains("hamburger");
+      if (!isClickInside) {
+        closeSidebar();
+      }
+    });
+  </script>
+</body>
+</html>

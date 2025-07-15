@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Movie Websites</title>
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --card: #1a1a1a;
+      --accent: #00ff90;
+      --text: #e6e6e6;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Consolas, monospace;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #111;
+      padding: 1rem 2rem;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--accent);
+      box-shadow: 0 2px 4px #000;
+      position: relative;
+    }
+
+    .hamburger {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      color: var(--accent);
+      display: none;
+      cursor: pointer;
+    }
+
+    .layout {
+      display: flex;
+      flex: 1;
+    }
+
+    /* Sidebar */
+    #sidebar {
+      background: #111;
+      padding: 2rem 1rem;
+      min-width: 220px;
+      border-right: 2px solid var(--card);
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1000;
+    }
+
+    #sidebar ul {
+      list-style: none;
+    }
+
+    #sidebar li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--accent);
+      cursor: pointer;
+    }
+
+    #sidebar li:hover {
+      color: #fff;
+    }
+
+    /* ❌ Close button */
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.4rem;
+      background: none;
+      border: none;
+      color: var(--accent);
+      cursor: pointer;
+      display: none;
+    }
+
+    /* Main content */
+    main {
+      flex: 1;
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    #course-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+
+    .course-card {
+      background: var(--card);
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 1.2rem 1rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--accent);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .course-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px #000;
+    }
+
+    .course-title {
+      color: var(--accent);
+    }
+
+    footer {
+      padding: 0.6rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #555;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .layout {
+        flex-direction: column;
+      }
+
+      #sidebar {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        transform: translateX(-100%);
+        border-right: none;
+        border-bottom: 2px solid var(--card);
+      }
+
+      #sidebar.active {
+        transform: translateX(0%);
+      }
+
+      .close-btn {
+        display: block;
+      }
+
+      #sidebar li {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="hamburger" onclick="toggleSidebar()">☰</button>
+    All Movie Websites
+  </header>
+
+  <div class="layout" id="layout">
+    <!-- Sidebar -->
+    <aside id="sidebar">
+      <button class="close-btn" onclick="closeSidebar()">✖</button>
+      <ul>
+      <a href="https://whatsapp.com/channel/0029Vb2ru4yBFLgQpNQ2rA1m" style="text-decoration: none; color: inherit;"><li><span class="icon">📱</span> Whatsapp Channel</li></a>
+      <a href="https://www.youtube.com/@ophackerstdio/UCpDlI_XNkAEBR1q7wWAlQTw?sub_confirmation=1" style="text-decoration: none; color: inherit;"><li><span class="icon">📺</span> Youtube Channel</li></a>
+      <a href="https://www.facebook.com/profile.php?id=61577075805787" style="text-decoration: none; color: inherit;"><li><span class="icon">📘</span> Facebook Page</li></a>
+      <a href="https://t.me/ophackerstdio" style="text-decoration: none; color: inherit;"><li><span class="icon">📘</span> Telegram Account</li></a>
+      </ul>
+    </aside>
+
+    <!-- Main content -->
+    <main>
+      <section id="course-list">
+        <a href="https://www.watch-movies.com.pk/" class="course-card"><span class="course-title">All Movies Website 01</span></a>
+        <a href="https://hindilinks4u.repair/" class="course-card"><span class="course-title">All Movies Website 02</span></a>
+        <a href="https://worldfree4u.study/" class="course-card"><span class="course-title">All Movies Website 03</span></a>
+        <a href="https://www.animated247.net/" class="course-card"><span class="course-title">All Cartoons Website</span></a>
+    </section>
+    </main>
+  </div>
+
+  <footer>&copy; 2025 All Movie Websites</footer>
+
+  <script>
+    const sidebar = document.getElementById("sidebar");
+
+    function toggleSidebar() {
+      sidebar.classList.toggle("active");
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove("active");
+    }
+
+    // Close sidebar when clicking outside
+    document.addEventListener("click", function (event) {
+      const isClickInside = sidebar.contains(event.target) || event.target.classList.contains("hamburger");
+      if (!isClickInside) {
+        closeSidebar();
+      }
+    });
+  </script>
+</body>
+</html>

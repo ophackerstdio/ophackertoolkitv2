@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Symblish Language • OP Hacker ToolKit v2</title>
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --card: #1a1a1a;
+      --accent: #00ff90;
+      --text: #e6e6e6;
+      --danger: #ff0066;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Consolas, monospace;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    #sidebar {
+      width: 220px;
+      height: 100vh;
+      background: var(--card);
+      color: var(--accent);
+      box-shadow: 2px 0 10px #000;
+      padding-top: 60px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 1000;
+      transition: left 0.3s ease;
+    }
+
+    #sidebar ul {
+      list-style: none;
+      padding: 0 20px;
+    }
+
+    #sidebar li {
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    #sidebar-close {
+      display: none;
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--accent);
+    }
+
+    /* Mobile Sidebar */
+    @media (max-width: 768px) {
+      #sidebar {
+        left: -250px;
+      }
+
+      #sidebar.open {
+        left: 0;
+      }
+
+      #sidebar-close {
+        display: block;
+      }
+
+      #menu-btn {
+        display: block;
+      }
+
+      main {
+        padding-left: 0 !important;
+      }
+
+      footer {
+        margin-left: 0;
+      }
+    }
+
+    /* HEADER */
+    header {
+      background: #111;
+      padding: 1rem 2rem;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--accent);
+      box-shadow: 0 2px 4px #000;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 60px;
+    }
+
+    header span {
+      font-size: 0.95rem;
+      font-weight: normal;
+      display: block;
+      margin-top: 0.3rem;
+    }
+
+    #menu-btn {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      cursor: pointer;
+      display: none;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      margin-left: 220px;
+      margin-top: 60px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      max-width: 640px;
+      width: 100%;
+      box-shadow: 0 0 10px #000;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .card h2 {
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 110px;
+      padding: 0.8rem;
+      border-radius: 10px;
+      border: none;
+      background: #262626;
+      color: var(--text);
+      font-size: 15px;
+      resize: vertical;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1rem 0;
+    }
+
+    button {
+      flex: 1 1 calc(50% - 0.6rem);
+      padding: 0.7rem;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-accent { background: var(--accent); color: #000; }
+    .btn-dark   { background: #333; color: var(--text); }
+    .btn-danger { background: var(--danger); color: #fff; }
+
+    output {
+      display: block;
+      margin-top: 0.8rem;
+      padding: 0.8rem;
+      border-radius: 10px;
+      background: #262626;
+      word-wrap: break-word;
+      min-height: 110px;
+      white-space: pre-wrap;
+    }
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .toggle input {
+      accent-color: var(--accent);
+    }
+
+    footer {
+      padding: 0.6rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #555;
+      margin-left: 220px;
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        padding: 1.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <div id="sidebar-close">&times;</div>
+    <ul>
+      <a href="https://whatsapp.com/channel/0029Vb2ru4yBFLgQpNQ2rA1m" style="text-decoration: none; color: inherit;"><li><span class="icon">📱</span> Whatsapp Channel</li></a>
+      <a href="https://www.youtube.com/@ophackerstdio/UCpDlI_XNkAEBR1q7wWAlQTw?sub_confirmation=1" style="text-decoration: none; color: inherit;"><li><span class="icon">📺</span> Youtube Channel</li></a>
+      <a href="https://www.facebook.com/profile.php?id=61577075805787" style="text-decoration: none; color: inherit;"><li><span class="icon">📘</span> Facebook Page</li></a>
+      <a href="https://t.me/ophackerstdio" style="text-decoration: none; color: inherit;"><li><span class="icon">📘</span> Telegram Account</li></a>
+    </ul>
+  </div>
+
+  <div style="flex: 1; display: flex; flex-direction: column;">
+    <header>
+      <div id="menu-btn">☰</div>
+      Symblish Language By<br><span>OP Hacker Stdio</span>
+    </header>
+
+    <main>
+      <div class="card">
+        <h2>Symbol ⇄ Letter Converter</h2>
+        <label for="inputText">Input</label>
+        <textarea id="inputText" placeholder="Enter text or symbols..."></textarea>
+        <div class="controls">
+          <button id="toLetters" class="btn-accent">⇦ To Letters</button>
+          <button id="toSymbols" class="btn-accent">To Symbols ⇨</button>
+          <button id="swap" class="btn-dark">Swap ⥂</button>
+          <button id="copy" class="btn-dark">Copy 📋</button>
+          <button id="clear" class="btn-danger">Clear ✖</button>
+        </div>
+        <label for="outputText">Output</label>
+        <output id="outputText" for="inputText"></output>
+        <div class="toggle"><input type="checkbox" id="liveToggle"><label for="liveToggle">Live convert while typing</label></div>
+      </div>
+    </main>
+
+    <footer>&copy; 2025 OP Hacker ToolKit V2 • Symblish Converter</footer>
+  </div>
+
+  <script>
+    const symbolToLetter = {
+      '^':'A','+':'B','×':'C','&':'D','÷':'E','*':'F','=':'G','(':'H','/':'I',')':'J','_':'K','-':'L',
+      '€':'M','`':'N','£':'O','"':'P','¥':'Q',':':'R','₩':'S',';':'T','!':'U',',':'V','@':'W','?':'X','#':'Y','$':'Z'
+    };
+    const letterToSymbol = {};
+    for (const sym in symbolToLetter) {
+      const l = symbolToLetter[sym];
+      letterToSymbol[l.toUpperCase()] = sym;
+      letterToSymbol[l.toLowerCase()] = sym;
+    }
+
+    const input = document.getElementById('inputText');
+    const output = document.getElementById('outputText');
+    const liveToggle = document.getElementById('liveToggle');
+
+    function toLetters(str) {
+      return Array.from(str).map(ch => symbolToLetter[ch] || ch).join('');
+    }
+
+    function toSymbols(str) {
+      return Array.from(str).map(ch => letterToSymbol[ch] || ch).join('');
+    }
+
+    function convertLetters() {
+      output.textContent = toLetters(input.value);
+    }
+
+    function convertSymbols() {
+      output.textContent = toSymbols(input.value);
+    }
+
+    document.getElementById('toLetters').onclick = convertLetters;
+    document.getElementById('toSymbols').onclick = convertSymbols;
+
+    document.getElementById('swap').onclick = () => {
+      const tmp = input.value;
+      input.value = output.textContent;
+      output.textContent = tmp;
+    };
+
+    document.getElementById('copy').onclick = () => {
+      navigator.clipboard.writeText(output.textContent || '').then(() => {
+        const btn = document.getElementById('copy');
+        btn.textContent = 'Copied ✓';
+        setTimeout(() => btn.textContent = 'Copy 📋', 1200);
+      });
+    };
+
+    document.getElementById('clear').onclick = () => {
+      input.value = '';
+      output.textContent = '';
+    };
+
+    liveToggle.onchange = () => {
+      if (liveToggle.checked) {
+        input.addEventListener('input', liveHandler);
+      } else {
+        input.removeEventListener('input', liveHandler);
+      }
+    };
+
+    function liveHandler() {
+      output.textContent = toSymbols(input.value);
+    }
+
+    // Sidebar toggle
+    const sidebar = document.getElementById('sidebar');
+    const menuBtn = document.getElementById('menu-btn');
+    const closeBtn = document.getElementById('sidebar-close');
+
+    menuBtn.onclick = () => {
+      sidebar.classList.toggle('open');
+    };
+
+    closeBtn.onclick = () => {
+      sidebar.classList.remove('open');
+    };
+
+    document.addEventListener('click', function (e) {
+      if (sidebar.classList.contains('open') &&
+          !sidebar.contains(e.target) &&
+          !menuBtn.contains(e.target)) {
+        sidebar.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>

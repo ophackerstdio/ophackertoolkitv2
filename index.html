@@ -114,14 +114,14 @@
     }
 
     #menu-btn {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 24px;
-      cursor: pointer;
-      display: none;
-    }
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    cursor: pointer;
+    display: none; /* default hidden */
+  }
 
     /* MAIN */
     main {
@@ -136,6 +136,9 @@
       main {
         padding: 1rem;
         padding-left: 0;
+      }
+      #menu-btn {
+        display: block;
       }
     }
     @media (max-width: 768px) {
